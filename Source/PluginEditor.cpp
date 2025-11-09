@@ -1,5 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <juce_gui_basics/juce_gui_basics.h>
 
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (AudioPluginAudioProcessor& p)
@@ -9,6 +10,17 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (AudioPluginAud
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+
+    // Add + configure child components
+    addAndMakeVisible(sldrOutputGain);
+    addAndMakeVisible(lblOutputGain);
+
+    sldrOutputGain.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    sldrOutputGain.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::DEFAULT_SLIDER_TBOX_READONLY, EditorDefaults::DEFAULT_SLIDER_TBOX_WIDTH, EditorDefaults::DEFAULT_SLIDER_TBOX_HEIGHT);
+    sldrOutputGain.setRange(EditorDefaults::DEFAULT_SLIDER_MIN, EditorDefaults::DEFAULT_SLIDER_MAX, EditorDefaults::DEFAULT_SLIDER_STEP);
+    sldrOutputGain.setTextValueSuffix("dB");
+    lblOutputGain.setText("Output Gain", juce::NotificationType::dontSendNotification);
+    lblOutputGain.attachToComponent(&sldrOutputGain, true);
 }
 
 AudioPluginAudioProcessorEditor::~AudioPluginAudioProcessorEditor()
@@ -23,11 +35,13 @@ void AudioPluginAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("Iron Whale", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void AudioPluginAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    juce::Rectangle<int> bounds = getLocalBounds();
+
+    // Lay out child components
+    sldrOutputGain.setBounds(bounds.getCentreX() - EditorDefaults::DEFAULT_SLIDER_WIDTH / 2, bounds.getCentreY() - EditorDefaults::DEFAULT_SLIDER_HEIGHT / 2,
+                             EditorDefaults::DEFAULT_SLIDER_WIDTH, EditorDefaults::DEFAULT_SLIDER_HEIGHT);
 }
