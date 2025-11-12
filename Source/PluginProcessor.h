@@ -61,7 +61,7 @@ private:
     std::vector<GainDSP> gainDsps {};
 
     // Parameter pointers
-    std::atomic<float>* paramOutputGain {};
+    juce::AudioParameterFloat* paramOutputGain {};
 
     // State Management
     juce::AudioProcessorValueTreeState state;

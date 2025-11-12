@@ -4,14 +4,14 @@
 //==============================================================================
 AudioPluginAudioProcessor::AudioPluginAudioProcessor()
      : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
                        .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
                        ), state(*this, nullptr, "parameters", createParameters())
 {
+    // Save memory - retrieve parameter pointers before any processing
+    auto* p = state.getParameter(DelayParameters::paramIDOutputGain.getParamID());
+    paramOutputGain = dynamic_cast<juce::AudioParameterFloat*>(p);
+    jassert(paramOutputGain);
 }
 
 AudioPluginAudioProcessor::~AudioPluginAudioProcessor()
@@ -90,9 +90,6 @@ void AudioPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
 
     // One DSP object per output channel
     gainDsps.resize(getTotalNumOutputChannels());
-
-    // Save memory - retrieve parameter pointers before processing
-    paramOutputGain = state.getRawParameterValue(DelayParameters::paramIDOutputGain.getParamID());
 }
 
 void AudioPluginAudioProcessor::releaseResources()
@@ -138,7 +135,7 @@ void AudioPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
         buffer.clear (i, 0, buffer.getNumSamples());
 
     const int blockSize = buffer.getNumSamples();
-    const float outputGain = paramOutputGain->load();
+    const float outputGain = paramOutputGain->get();
 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
