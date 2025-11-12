@@ -1,5 +1,7 @@
 ## Introduction
-This is my first attempt at creating a fully-functional audio FX plugin: a delay/echo effect with added harmonic excitement capabilities. This involves learning the relevant mathematics behind non-linear digital signal processing (DSP). All of this is self-taught.
+This is my first attempt at creating a fully-functional audio FX plugin: a delay/echo effect with added harmonic excitement capabilities. This involves learning the relevant mathematics behind non-linear digital signal processing (DSP). All of this is self-taught. 
+
+I am documenting the entire development process through commits. Mostly for personal enjoyment and motivation.
 
 ## Intentions
 * Delay DSP algorithm.
