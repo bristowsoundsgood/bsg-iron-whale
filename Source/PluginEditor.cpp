@@ -1,7 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <juce_gui_basics/juce_gui_basics.h>
-#include <juce_gui_basics/juce_gui_basics.h>
 
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginProcessor& p)
@@ -17,7 +16,9 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginPro
     addAndMakeVisible(sldrOutGain);
     addAndMakeVisible(lblOutGain);
     addAndMakeVisible(sldrDelayTime);
-    addAndMakeVisible(lblFeedback);
+    addAndMakeVisible(lblDelayTime);
+    addAndMakeVisible(sldrDryWet);
+    addAndMakeVisible(lblDryWet);
 
     sldrOutGain.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     sldrOutGain.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
@@ -29,8 +30,14 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginPro
     sldrDelayTime.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     sldrDelayTime.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
     sldrDelayTime.setRange(PluginConfig::minDelayTime, PluginConfig::maxDelayTime, PluginConfig::sliderStepDefault);
-    lblFeedback.setText(PluginConfig::paramNameDelayTime, juce::NotificationType::dontSendNotification);
-    lblFeedback.attachToComponent(&sldrDelayTime, true);
+    lblDelayTime.setText(PluginConfig::paramNameDelayTime, juce::NotificationType::dontSendNotification);
+    lblDelayTime.attachToComponent(&sldrDelayTime, true);
+
+    sldrDryWet.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    sldrDryWet.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
+    sldrDryWet.setRange(PluginConfig::minDryWet, PluginConfig::maxDryWet, PluginConfig::sliderStepDryWet);
+    lblDryWet.setText(PluginConfig::paramNameDryWet, juce::NotificationType::dontSendNotification);
+    lblDryWet.attachToComponent(&sldrDryWet, true);
 }
 
 AudioPluginAudioProcessorEditor::~AudioPluginAudioProcessorEditor()
@@ -47,14 +54,15 @@ void AudioPluginAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (15.0f);
 }
 
+// Lay out child components
 void AudioPluginAudioProcessorEditor::resized()
 {
     const juce::Rectangle<int> bounds = getLocalBounds();
-
-    // Lay out child components
     sldrDelayTime.setBounds(bounds.getCentreX() - EditorDefaults::defaultSliderWidth / 2, bounds.getCentreY() - EditorDefaults::defaultSliderHeight / 2,
                              EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
 
-    sldrOutGain.setBounds(bounds.getCentreX() - EditorDefaults::defaultSliderWidth / 2, (bounds.getCentreY() - EditorDefaults::defaultSliderHeight / 2) + EditorDefaults::sliderMarginY,
-        EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
+    // Position elements relative to delay time, which is the main parameter.
+    const juce::Rectangle<int> delayTimeBounds = sldrDelayTime.getBounds();
+    sldrOutGain.setBounds(delayTimeBounds.getX(), delayTimeBounds.getY() - EditorDefaults::defaultSliderHeight - EditorDefaults::sliderMarginY, EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
+    sldrDryWet.setBounds(delayTimeBounds.getX(), delayTimeBounds.getBottom() + EditorDefaults::sliderMarginY, EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
 }

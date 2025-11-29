@@ -15,7 +15,7 @@ namespace EditorDefaults
     static constexpr int defaultSliderTextBoxHeight {30};
     static constexpr bool defaultSliderTextBoxReadOnly {false};
 
-    static constexpr int sliderMarginY {200};
+    static constexpr int sliderMarginY {20};
 }
 
 class AudioPluginAudioProcessorEditor final : public juce::AudioProcessorEditor
@@ -37,7 +37,9 @@ private:
     juce::Slider sldrOutGain;
     juce::Label lblOutGain;
     juce::Slider sldrDelayTime;
-    juce::Label lblFeedback;
+    juce::Label lblDelayTime;
+    juce::Slider sldrDryWet;
+    juce::Label lblDryWet;
 
     // Parameter attachments
     juce::AudioProcessorValueTreeState::SliderAttachment attOutGain;

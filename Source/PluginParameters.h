@@ -12,6 +12,7 @@ namespace PluginConfig
     // General
     static constexpr float sliderStepDefault {0.01f};
     static constexpr float sliderStepDelayTime {0.1f};
+    static constexpr float sliderStepDryWet {1.0f};
 
     // Gain
     static constexpr float minOutGain {-64.0f};
@@ -29,8 +30,14 @@ namespace PluginConfig
     static const juce::String paramNameDelayTime {"Delay Time"};
     static const juce::NormalisableRange<float> delayTimeRange {minDelayTime, maxDelayTime, sliderStepDelayTime, skewFactorDelay};
 
+    // Dry/wet
+    static constexpr float minDryWet {0.0f};
+    static constexpr float maxDryWet {100.0f};
+    static const juce::ParameterID paramIDDryWet {"dryWet", 1};
+    static const juce::String paramNameDryWet {"Dry/Wet"};
+
     // SmoothedValue settings
-    static constexpr float rampSmoothTime {0.001f};
+    static constexpr float rampSmoothTime {0.0005f};
 }
 
 class PluginParameters
