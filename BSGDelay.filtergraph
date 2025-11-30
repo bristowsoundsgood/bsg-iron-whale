@@ -65,10 +65,10 @@
           uiLastY_Normal="450" uiopen_Normal="1">
     <PLUGIN name="AudioFilePlayer" format="VST3" category="Fx" manufacturer="Matkat Music LLC"
             version="1.0.0" file="C:\Program Files\Common Files\VST3\AudioFilePlayer.vst3\Contents\x86_64-win\AudioFilePlayer.vst3"
-            uniqueId="79fe81c" isInstrument="0" fileTime="19ab21aa785" infoUpdateTime="19ad0eb3a6b"
+            uniqueId="79fe81c" isInstrument="0" fileTime="19ab21aa785" infoUpdateTime="19ad5869b64"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e95d02c7"/>
-    <STATE>326.VMjLgzS....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DiMv3BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQtHUQLolShUELhsVRxHlXuoWXqcWQQsVSxnkd3XjXh0jdTIVSvTUQ2U0TuEkUKwTUrM1Z2YzUD0TQTIVQTMlZqESXlgEUZIWUwHlXMUkVzUkQHcUQrM1ZAIET4MCdicVVG4hKt3hKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UX4BQP4hPqcjXm0jLh4BQP4xPt.0Qt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVP77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>324.VMjLgrS....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DSM43BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQ1EUQLolShUELhsVRxHlXuoWXqcWQQsVSxnkd3XjXh0jdTIVSvTUQ2U0TuEkUKwTUrM1Z2YzUD0TQTIVQTMlZqESXlgEUZIWUwHlXQQ0XnEDZPIWUVkkcAIETzI1UXESPt3hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -82,7 +82,7 @@
           uiLastY_Normal="248" uiopen_Normal="1">
     <PLUGIN name="Wave Observer" format="VST3" category="Fx|Analyzer" manufacturer="Press Play"
             version="1.7.0" file="C:\Program Files\Common Files\VST3\WaveObserver.vst3\Contents\x86_64-win\WaveObserver.vst3"
-            uniqueId="9c2eefb7" isInstrument="0" fileTime="18f21a1c140" infoUpdateTime="19ad0eb3a6b"
+            uniqueId="9c2eefb7" isInstrument="0" fileTime="18f21a1c140" infoUpdateTime="19ad5869b64"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="31175806"/>
     <STATE>352.VMjLgbU....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DSMx3RRjUCVtUDagQWUFElKXEVVzk0UYIGNFI1Z3TUX0EkUYUVTVMFdEYzXugCagszJ4EybYYSLykkMwnFYVg0azDCdqfkXw0jYlA0MJshatU0UYszJCQSZ1fjSoYCVNoVLwDlZUYkKq4jLXc1cVk0RqLzMt3hKt3hKt3RbNcjV0MlLWIWUwj0ZzXTVCUFbisVRxH1a3vVXNMDTtbjKlMmLEw1XqkULggGLwb0b3XTVqgSQYASRWgkdqESXzM2MOkUaYwVVrkEaZIjKt3hKtvyKIMzasA2atUlaz4COIUDYoQ2Pu4Fcx8FarUlb9.iK77RREQVZzMzatQmbuwFakImO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
@@ -99,10 +99,10 @@
           uiLastY_Normal="314" uiopen_Normal="1">
     <PLUGIN name="BSGDelay" format="VST3" category="Fx" manufacturer="bristowsoundsgood"
             version="0.0.1" file="C:\Program Files\Common Files\VST3\BSGDelay.vst3\Contents\x86_64-win\BSGDelay.vst3"
-            uniqueId="9ae32163" isInstrument="0" fileTime="19ad0eb14ca" infoUpdateTime="19ad0eb3a6b"
+            uniqueId="9ae32163" isInstrument="0" fileTime="19ad58665cc" infoUpdateTime="19ad5869b65"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="49e915b2"/>
-    <STATE>386.VMjLgjW....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9HCL03hUMoFSmYFRt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzS1UDahcFLVkkdUwlX4QyPOAUQpQUPvPDRuEkUOgFTVkkbEYEYTslUgsVRBgTLEYTXvTkUOgFUCwDctjFR0MyPOAUQpQUPvPDRuEkUOg1MVMldAc0X5MFUX8FMrgjYXcEVxU0UYgCRBwDctjFR0MyPOUmKWgEdEYUXqE0UYgWSs8jKt3hKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UX4BQP4hPqcjXm0jLh4BQP4xPt.0Qt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVP77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>415.VMjLgXY....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9HiL23hUMoFSmMSRt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzS1UDahcFLVkkdUwlX4QyPOAUQpQUPvPDRuEkUOgFTVkkbEYEYTslUgsVRBgTLEYTXvTkUOgFRCwjctj1R1gDdKkicCQUPIUETMEjTZoFLogTcUczX1U0QicTQVoEcIIDRwTjQgASUV8DZtj1R1gDdKkicCQUPIUETMEjTZoFLogjZIcEYWUkQig1Mn8zM2HjXmkzUXMWUFM1ZIIiX43hKt3hKt3hKt3hKt3FUUMTUDQEdqw1XmE0UYQTQFM1YAAkKAgDUjYWQwHVdAAkKAwjKtLlKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -116,7 +116,7 @@
           uiLastY_Normal="65" uiopen_Normal="0">
     <PLUGIN name="Pro-L 2" format="VST3" category="Fx|Dynamics" manufacturer="FabFilter"
             version="2.2.4.0" file="C:\Program Files\Common Files\VST3\FabFilter Pro-L 2.vst3"
-            uniqueId="45398b95" isInstrument="0" fileTime="18fc74fb200" infoUpdateTime="19ad0eb3a6b"
+            uniqueId="45398b95" isInstrument="0" fileTime="18fc74fb200" infoUpdateTime="19ad5869b65"
             numInputs="4" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="9cbebde2"/>
     <STATE>394.VMjLgDX....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DyMw3hQEwFVFkjKt3hK1MjKt3hKDUEaYcVUGEldAgGUqE0Qi8FMwjkKt3hKt3hPt3hKt3hKt3hKt3hKt4xcjQ0LyLzaqDzbOkCLtcWNt3hKtXyPt3hK18jKt3hKt3hKt3hKt3hKt3hKt3hKlshKt3hKt3hKt3hKP4hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKlshKt3hKt3hKt3hKt3hKtX1Jt3hKt3hKt3hKt.kKt3hYq3hKt3hKt3hKt3hKt3hKXEzPt3hKt3hKt3xLO4hKt3hKD4hKt3BTt3hKt3BOujzPu0Fbu4VYtQmO7jTQjkFcC8lazI2arwVYx4SLx3hQYQUVpEjKt3hKt3hKtLyS77RREQVZzMzatQmbuwFakImO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
@@ -133,7 +133,7 @@
   <FILTER uid="10" x="0.61875" y="0.5866935483870968" useARA="0">
     <PLUGIN name="Wave Observer" format="VST3" category="Fx|Analyzer" manufacturer="Press Play"
             version="1.7.0" file="C:\Program Files\Common Files\VST3\WaveObserver.vst3\Contents\x86_64-win\WaveObserver.vst3"
-            uniqueId="9c2eefb7" isInstrument="0" fileTime="18f21a1c140" infoUpdateTime="19ad0eb3a6b"
+            uniqueId="9c2eefb7" isInstrument="0" fileTime="18f21a1c140" infoUpdateTime="19ad5869b65"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="31175806"/>
     <STATE>352.VMjLgbU....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DSMx3RRjUCVtUDagQWUFElKXEVVzk0UYIGNFI1Z3TUX0EkUYUVTVMFdEYzXugCagszJ4EybYYSLykkMwnFYVg0azDCdqPENYgjMZgDYqIiatU0UYszJCQSZ1fjSoYCVNoVLwDlZUYkKq4jLXc1cVk0RqLzMt3hKt3hKt3RbNcjV0MlLWIWUwj0ZzXTVCUFbisVRxH1a3vVXNMDTtbjKlMmLEw1XqkULggGLwb0b3XTVqgSQYASRWgkdqESXzM2MOkUaYwVVrkEaZIjKt3hKtvyKIMzasA2atUlaz4COIUDYoQ2Pu4Fcx8FarUlb9.iK77RREQVZzMzatQmbuwFakImO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>

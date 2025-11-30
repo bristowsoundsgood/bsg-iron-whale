@@ -9,13 +9,13 @@
  * Therefore, decibels must be converted to linear units to scale sample amplitudes appropriately.
  * E.g., a 6dB increase doubles the amplitude, so it corresponds to a 2.0x coefficient.
  */
-float GainDSP::dBToLinearCoefficient(const float dB)
+float GainDSP::dBToLinearCoefficient(const float dB) noexcept
 {
     return static_cast<float>(pow(10, (dB / 20)));
 }
 
 
-void GainDSP::processBlock(float* block, const int blockSize) const
+void GainDSP::processBlock(float* block, const int blockSize) const noexcept
 {
     const float multiplier = dBToLinearCoefficient(m_gainDB);
 

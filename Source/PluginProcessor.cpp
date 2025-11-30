@@ -89,10 +89,10 @@ void DelayPluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     params.reset();
 
     // Prepare DSP objects. One per output channel
-    gainDsps.resize(numChannels);
-    delayDsps.resize(numChannels);
+    gainDSP.resize(numChannels);
+    delayDSP.resize(numChannels);
 
-    for (auto& d : delayDsps)
+    for (auto& d : delayDSP)
     {
         d.prepareToPlay(numChannels, static_cast<float>(sampleRate), samplesPerBlock);
     }
@@ -142,17 +142,22 @@ void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
     params.update();
     const float outGain = params.getOutputGainDB();
     const float delayTime = params.getDelayTimeSeconds();
+    const float dryWet = params.getDryWetNormalised();
 
-    for (auto& g : gainDsps) g.setGainDB(outGain);
-    for (auto& d : delayDsps) d.setTargetDelayTime(delayTime);
+    for (auto& g : gainDSP) g.setGainDB(outGain);
+    for (auto& d : delayDSP)
+    {
+        d.setDryWet(dryWet);
+        d.setTargetDelayTime(delayTime);
+    }
 
     // Process blocks of samples
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         float* channelData = audioBuffer.getWritePointer(channel);
 
-        delayDsps[channel].processBlock(channel, channelData, blockSize);
-        gainDsps[channel].processBlock(channelData, blockSize);
+        delayDSP[channel].processBlock(channel, channelData, blockSize);
+        gainDSP[channel].processBlock(channelData, blockSize);
     }
 }
 

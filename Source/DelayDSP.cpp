@@ -11,7 +11,7 @@ int DelayDSP::convertSecondsToSamples(const float seconds) const
     return static_cast<int>(std::ceil(seconds * m_sampleRate));
 }
 
-void DelayDSP::prepareToPlay(const int numChannels, const float sampleRate, const int blockSize)
+void DelayDSP::prepareToPlay(const int numChannels, const float sampleRate, const int blockSize) noexcept
 {
     m_sampleRate = sampleRate;
 
@@ -33,7 +33,7 @@ void DelayDSP::prepareToPlay(const int numChannels, const float sampleRate, cons
     delayLine.reset();
 }
 
-void DelayDSP::processBlock(const int channel, float* block, const int blockSize)
+void DelayDSP::processBlock(const int channel, float* block, const int blockSize) noexcept
 {
     for (int sample = 0; sample < blockSize; ++sample)
     {
@@ -48,12 +48,10 @@ void DelayDSP::processBlock(const int channel, float* block, const int blockSize
 
         // Retrieve delayed sample from delay buffer
         const float wet = delayLine.popSample(channel, delayLine.getDelay());
-        block[sample] = wet;
+
+        // Mix dry and wet signal, based on dry/wet value. 100% wet means only wet. 100% dry is only dry. 50% wet is dry and wet in equal amounts.
+        block[sample] = (1.0f - m_dryWet) * dry + m_dryWet  * wet;
     }
 }
 
-void DelayDSP::setDelayTime(const float seconds)
-{
-    delayLine.setDelay(convertSecondsToSamples(seconds)); // Convert ms to s, then convert s to samples
-}
 

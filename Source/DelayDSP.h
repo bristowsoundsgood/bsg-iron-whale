@@ -10,17 +10,19 @@
 class DelayDSP
 {
 public:
-    void prepareToPlay(int numChannels, float sampleRate, int blockSize);
-    void processBlock(int channel, float* block, int blockSize);
+    void prepareToPlay(int numChannels, float sampleRate, int blockSize) noexcept;
+    void processBlock(int channel, float* block, int blockSize) noexcept;
 
     // Delay time is in seconds. No need to convert units in this class
     void setTargetDelayTime(const float targetDelayTime) { m_targetDelayTime = targetDelayTime; }
     void smoothenDelayTime() { m_currentDelayTime += (m_targetDelayTime - m_currentDelayTime) * m_smootherCoefficient; }
 
-    void setDelayTime(float seconds);
+    void setDelayTime(const float seconds) { delayLine.setDelay(convertSecondsToSamples(seconds)); }
+    void setDryWet(const float dryWet) { m_dryWet = dryWet;  }
 
 private:
     float m_sampleRate {};
+    float m_dryWet {};
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> delayLine {};
 
     float m_currentDelayTime {0.0f};

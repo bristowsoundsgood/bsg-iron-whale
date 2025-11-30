@@ -5,7 +5,8 @@
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginProcessor& p)
     : AudioProcessorEditor (&p), processorRef (p), attOutGain(p.getProcessorValueTreeState(), PluginConfig::paramIDOutGain.getParamID(), sldrOutGain),
-        attDelayTime(p.getProcessorValueTreeState(), PluginConfig::paramIDDelayTime.getParamID(), sldrDelayTime)
+        attDelayTime(p.getProcessorValueTreeState(), PluginConfig::paramIDDelayTime.getParamID(), sldrDelayTime),
+        attDryWet(p.getProcessorValueTreeState(), PluginConfig::paramIDDryWet.getParamID(), sldrDryWet)
 {
     juce::ignoreUnused (processorRef);
     // Make sure that before the constructor has finished, you've set the
@@ -22,20 +23,21 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginPro
 
     sldrOutGain.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     sldrOutGain.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrOutGain.setRange(PluginConfig::minOutGain, PluginConfig::maxOutGain, PluginConfig::sliderStepDefault);
+    sldrOutGain.setRange(PluginConfig::minOutGain, PluginConfig::maxOutGain, PluginConfig::intervalDefault);
     sldrOutGain.setTextValueSuffix("dB");
     lblOutGain.setText(PluginConfig::paramNameOutGain, juce::NotificationType::dontSendNotification);
     lblOutGain.attachToComponent(&sldrOutGain, true);
 
     sldrDelayTime.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     sldrDelayTime.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrDelayTime.setRange(PluginConfig::minDelayTime, PluginConfig::maxDelayTime, PluginConfig::sliderStepDefault);
+    sldrDelayTime.setRange(PluginConfig::minDelayTime, PluginConfig::maxDelayTime, PluginConfig::intervalDefault);
     lblDelayTime.setText(PluginConfig::paramNameDelayTime, juce::NotificationType::dontSendNotification);
     lblDelayTime.attachToComponent(&sldrDelayTime, true);
 
     sldrDryWet.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     sldrDryWet.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrDryWet.setRange(PluginConfig::minDryWet, PluginConfig::maxDryWet, PluginConfig::sliderStepDryWet);
+    sldrDryWet.setRange(PluginConfig::minDryWet, PluginConfig::maxDryWet, PluginConfig::intervalDryWet);
+    sldrDryWet.setTextValueSuffix("%");
     lblDryWet.setText(PluginConfig::paramNameDryWet, juce::NotificationType::dontSendNotification);
     lblDryWet.attachToComponent(&sldrDryWet, true);
 }

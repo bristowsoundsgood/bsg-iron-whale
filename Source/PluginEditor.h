@@ -44,6 +44,7 @@ private:
     // Parameter attachments
     juce::AudioProcessorValueTreeState::SliderAttachment attOutGain;
     juce::AudioProcessorValueTreeState::SliderAttachment attDelayTime;
+    juce::AudioProcessorValueTreeState::SliderAttachment attDryWet;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessorEditor)
 };

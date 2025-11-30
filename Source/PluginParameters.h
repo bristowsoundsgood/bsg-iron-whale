@@ -10,9 +10,9 @@
 namespace PluginConfig
 {
     // General
-    static constexpr float sliderStepDefault {0.01f};
-    static constexpr float sliderStepDelayTime {0.1f};
-    static constexpr float sliderStepDryWet {1.0f};
+    static constexpr float intervalDefault {0.01f};
+    static constexpr float intervalDelayTime {0.1f};
+    static constexpr float intervalDryWet {1.0f};
 
     // Gain
     static constexpr float minOutGain {-64.0f};
@@ -28,13 +28,15 @@ namespace PluginConfig
     static constexpr float skewFactorDelay {0.25f};
     static const juce::ParameterID paramIDDelayTime {"delayTime", 1};
     static const juce::String paramNameDelayTime {"Delay Time"};
-    static const juce::NormalisableRange<float> delayTimeRange {minDelayTime, maxDelayTime, sliderStepDelayTime, skewFactorDelay};
+    static const juce::NormalisableRange<float> delayTimeRange {minDelayTime, maxDelayTime, intervalDelayTime, skewFactorDelay};
 
     // Dry/wet
     static constexpr float minDryWet {0.0f};
     static constexpr float maxDryWet {100.0f};
+    static constexpr float defaultDryWet {100.0f};
     static const juce::ParameterID paramIDDryWet {"dryWet", 1};
     static const juce::String paramNameDryWet {"Dry/Wet"};
+    static const juce::NormalisableRange<float> dryWetRange {minDryWet, maxDryWet, intervalDryWet};
 
     // SmoothedValue settings
     static constexpr float rampSmoothTime {0.0005f};
@@ -52,6 +54,7 @@ public:
     // Accessor methods
     [[nodiscard]] float getOutputGainDB() { return m_smootherGain.getNextValue(); }
     [[nodiscard]] float getDelayTimeSeconds() const { return m_paramDelayTime->get() / 1000.0f; }
+    [[nodiscard]] float getDryWetNormalised() { return m_smootherDryWet.getNextValue() / 100.0f; }  // Returns float between 0.0 and 1.0 to simplify DSP
 
     // Parameter smoothing methods
     void prepare(double sampleRate) noexcept;
@@ -62,9 +65,11 @@ private:
     // Parameter objects
     juce::AudioParameterFloat* m_paramOutGain {};
     juce::AudioParameterFloat* m_paramDelayTime {};
+    juce::AudioParameterFloat* m_paramDryWet {};
 
     // Parameter smoothing
     juce::SmoothedValue<float> m_smootherGain {};
+    juce::SmoothedValue<float> m_smootherDryWet {};
 };
 
 #endif //PLUGINPARAMETERS_H
