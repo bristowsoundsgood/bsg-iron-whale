@@ -1,23 +1,11 @@
 #pragma once
 
-#include "PluginProcessor.h"
-#include "PluginParameters.h"
 #include <juce_gui_basics/juce_gui_basics.h>
+#include "PluginProcessor.h"
+#include "../GUI/EditorConfig.h"
+#include "../GUI/RotaryDial.h"
 
 //==============================================================================
-namespace EditorDefaults
-{
-    static constexpr int defaultWindowWidth {400};
-    static constexpr int defaultWindowHeight {600};
-    static constexpr int defaultSliderWidth {150};
-    static constexpr int defaultSliderHeight {150};
-    static constexpr int defaultSliderTextBoxWidth {70};
-    static constexpr int defaultSliderTextBoxHeight {30};
-    static constexpr bool defaultSliderTextBoxReadOnly {false};
-
-    static constexpr int sliderMarginY {20};
-}
-
 class AudioPluginAudioProcessorEditor final : public juce::AudioProcessorEditor
 {
 public:
@@ -29,22 +17,18 @@ public:
     void resized() override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+    // This reference is provided as a quick way for your editor to access the processor object that created it.
     DelayPluginProcessor& processorRef;
+    juce::AudioProcessorValueTreeState& stateRef;
+
+    juce::GroupComponent delayGroup;
+    juce::GroupComponent feedbackGroup;
+    juce::GroupComponent mixGroup;
 
     // Declare child components
-    juce::Slider sldrOutGain;
-    juce::Label lblOutGain;
-    juce::Slider sldrDelayTime;
-    juce::Label lblDelayTime;
-    juce::Slider sldrDryWet;
-    juce::Label lblDryWet;
+    RotaryDial dialDelayTime {stateRef, PluginConfig::paramIDDelayTime, "Time"};
+    RotaryDial dialDryWet {stateRef, PluginConfig::paramIDDryWet, "Dry/Wet"};
+    RotaryDial dialOutGain {stateRef, PluginConfig::paramIDOutGain, "Output Gain"};
 
-    // Parameter attachments
-    juce::AudioProcessorValueTreeState::SliderAttachment attOutGain;
-    juce::AudioProcessorValueTreeState::SliderAttachment attDelayTime;
-    juce::AudioProcessorValueTreeState::SliderAttachment attDryWet;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioPluginAudioProcessorEditor)
 };

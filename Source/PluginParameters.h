@@ -20,6 +20,7 @@ namespace PluginConfig
     static constexpr float defaultOutGain {0.0f};
     static const juce::ParameterID paramIDOutGain {"outputGain", 1};
     static const juce::String paramNameOutGain {"Output Gain"};
+    static const juce::NormalisableRange<float> outputGainRange {minOutGain, maxOutGain, intervalDefault};
 
     // Delay
     static constexpr float minDelayTime {5.0f};
@@ -33,7 +34,7 @@ namespace PluginConfig
     // Dry/wet
     static constexpr float minDryWet {0.0f};
     static constexpr float maxDryWet {100.0f};
-    static constexpr float defaultDryWet {100.0f};
+    static constexpr float defaultDryWet {50.0f};
     static const juce::ParameterID paramIDDryWet {"dryWet", 1};
     static const juce::String paramNameDryWet {"Dry/Wet"};
     static const juce::NormalisableRange<float> dryWetRange {minDryWet, maxDryWet, intervalDryWet};

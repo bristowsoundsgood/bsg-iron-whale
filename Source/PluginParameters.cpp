@@ -36,10 +36,13 @@ void PluginParameters::update() noexcept
 juce::AudioProcessorValueTreeState::ParameterLayout PluginParameters::createParameterLayout() noexcept
 {
     return {
-        std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDOutGain, PluginConfig::paramNameOutGain, PluginConfig::minOutGain, PluginConfig::maxOutGain, PluginConfig::defaultOutGain),
+        std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDOutGain, PluginConfig::paramNameOutGain, PluginConfig::outputGainRange,
+            PluginConfig::defaultOutGain, juce::AudioParameterFloatAttributes().withStringFromValueFunction(ParameterUtils::stringFromDecibels)),
+
         std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDDelayTime, PluginConfig::paramNameDelayTime, PluginConfig::delayTimeRange,
-            PluginConfig::defaultDelayTime, juce::AudioParameterFloatAttributes().withStringFromValueFunction(ParameterUtils::adaptPrecisionMilliseconds)),
+            PluginConfig::defaultDelayTime, juce::AudioParameterFloatAttributes().withStringFromValueFunction(ParameterUtils::stringFromMilliseconds)),
+
         std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDDryWet, PluginConfig::paramNameDryWet, PluginConfig::dryWetRange,
-            PluginConfig::defaultDryWet)
+            PluginConfig::defaultDryWet, juce::AudioParameterFloatAttributes().withStringFromValueFunction(ParameterUtils::stringFromPercent))
     };
 }

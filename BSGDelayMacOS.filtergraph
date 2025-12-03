@@ -65,10 +65,10 @@
           uiLastY_Normal="118" uiopen_Normal="1">
     <PLUGIN name="BSGDelay" format="VST3" category="Fx" manufacturer="bristowsoundsgood"
             version="0.0.1" file="/Users/joebristow/Library/Audio/Plug-Ins/VST3/BSGDelay.vst3"
-            uniqueId="9ae32163" isInstrument="0" fileTime="19aabe2e30c" infoUpdateTime="19aabe467e4"
+            uniqueId="9ae32163" isInstrument="0" fileTime="19ad6426a73" infoUpdateTime="19ad6438bdb"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="d8abd9e"/>
-    <STATE>479.VMjLgXc....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9HyM03hUMoFSmMCSt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzS1UDahcFLVkkdUwlX4QyPOAUQpQUPvPDRuEkUOg1MVMldAc0X5MFUX8FMrgjYXcEVxU0UYgCRRszcyHTS44xTMcGQC0jLPkVS1oVdLICUSk0bXkFR0MyPOAUQpQUPvPDRuEkUOgFTVkkbEYEYFUkUYoVRVgUZywFRlg0UXIWUWkENHIESz4RdMQiZS4DMpkFS4I1PLEiKS0DLHg2R4X2PTETRUAUSAIkVpASZHoVUFE1YqcTUuAiUYglKnM1Y2Y0XqASZHg2LBwDZ2f1S2biPhcVRWg0bUYzXqkjLhkiKt3hKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDTtDDRTQlcEEiX4EDTtDDSt3xXt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQ77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>526.VMjLgTf....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9LSLv3hUMoFSmQzSt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzS1UDahcFLVkkdUwlX4QyPOAUQpQUPvPDRuEkUOg1MVMldAc0X5MFUX8FMrgjYXcEVxU0UYgCRRszcyHTS44xTMcGQC0jLPkVS1oVdLICUSk0bXkFR0MyPOAUQpQUPvPDRuEkUOgFTVkkbEYEYFUkUYoVRVgUZywFRlg0UXIWUWkENHIESz4RdMQiZS4DMpkFS4I1PLEiKS0DLHg2R4X2PTETRUAUSAIkVpASZHoVUFE1YqcTUuAiUYglKnM1Y2Y0XqASZHgmKCwDctjFR0MyPOAUQpQUPvPDRuEkUOgFTrIFMiUUV5kjPHESQFEFLUY0SnQ0PLQmKogTcyLzS04xUXgWQVE1ZQcUV30TaO4hKt3hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEVtPDTtHzZGI1YMIiXtPDTtLjKPcjKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -81,7 +81,7 @@
   <FILTER uid="7" x="0.49625" y="0.7423076923076923" useARA="0">
     <PLUGIN name="Wave Observer" format="AudioUnit" category="Effect" manufacturer="Press Play"
             version="1.4.1" file="AudioUnit:Effects/aufx,PPwo,PPly" uniqueId="61757d6e"
-            isInstrument="0" fileTime="0" infoUpdateTime="19aabe467e4" numInputs="2"
+            isInstrument="0" fileTime="0" infoUpdateTime="19ad6438bdb" numInputs="2"
             numOutputs="2" isShell="0" hasARAExtension="0" uid="61757d6e"/>
     <STATE>268.hAGaoMGcv.i0AHv.DTfAGfPBJr.CT4VXsUFWsEla0YVXiQWcxUlbTQVXzEFUzkGbkc0b0IFc4AWYWYWYxMWZu4FTR.ETrk2SPXXhmNFZg4lakwF.1Vla1UFauAWYe01ajU1WjUmbgQWZu41x+rca1tca1tMomEVZts7OUeFxtFhW4QZauQVYAT5biEFakIvpyg1a28EakcVYtQ1vkRGZk0VY.bpckI2bo8laNCP.DDfs2ElckY1ax01Ws8FYk8EY0IWXzk1ats7OYmYlYlYlZJQX0YFdR.ET28lD.D.AAfPEZbBKwjSPBcDzUqM.......P.A.........PC....................eC</STATE>
     <LAYOUT>
@@ -97,7 +97,7 @@
           uiLastY_Normal="275" uiopen_Normal="1">
     <PLUGIN name="AUAudioFilePlayer" format="AudioUnit" category="Generator"
             manufacturer="Apple" version="1.6.0" file="AudioUnit:Generators/augn,afpl,appl"
-            uniqueId="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="19aabe467e4"
+            uniqueId="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="19ad6438bdb"
             numInputs="0" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="6163676e"/>
     <STATE>852.hAGaoMGcv.C1AHv.DTfAGfPBJr.IkXxIpvUag4VclE1XzUmbkIGUjEFcg8EDarVPUAkbkMWYzAUYxMWZyQWYtQ2TzEFcksTY4c0b0IFc4AWYWYWYxMWZu4FUzkGbk8EDOXVZrUVKxUlYkIWYtMVYyQkag0VYRDFbvwFPhxfFR2fCO.AVFkFak4TXsU1URU1Yo8lay8EDb8RUyUlby8hZuUlXxk1bz81cuPTYysFcuA2KCM0KS8lYzcWXxUFHE41Yo4VYkIWZtc1KMkFYsvTY1UFauPzTP8RP0QVZuAhQowVYy8xTo4VYfbUX1UFHAMiK2ElcgFA0RLAEUXwEVjgWRU1Yo8laD8VYywzauAmVRU1Yo8laDEFcg8EDPjzbSUFakMFckQlTkcVZu4lVRU1Yo8laNEVakkvSP.G...........3+AIS.....n.fPxD.....DTOtZA....L..........nP83pE.....JTOtZA....D....P..........................................D...............XUME.......InkSkcGHRU1Yo8laS2fCavQGV3URyMUYrU1XzUFYFkFak8EDa8RUyUlby8hZuUlXxk1bz81cuPTYysFcuA2KCM0KS8lYzcWXxUFHE41Yo4VYkIWZtc1KMkFYsvTY1UFauPzTP8RP0QVZuAhQowVYy8BQ0IFHBwVYkAGHA4xcgYWndPsDSPQEe.hEhfvSP.G...........BFDA..fA..................fMtQAA..........0QVZuUhLvXTZrU1buPTchE.....akUFb.....................................7++e+O..........7jJ..v+++9eInkSkcGHRU1Yo8laIHQXlAGaP.fDgU2YtIMJo7.GVYTZrUFHwXkQowVYfHCVU4FcoQGakQF.H.PF.XB.q.PR.DE.YAfW..G.0Afd.rG.9Avf.vH.TBv7.TO.9GPCAfQ.qDfMAbS.pFvpAXa.8F.yBnh.rHPMBXi.oJfpBTq.1JvtBzq.BKvwB3r.UC.......HP..........rB..................Hf2</STATE>
@@ -112,7 +112,7 @@
           uiLastY_Normal="164" uiopen_Normal="0">
     <PLUGIN name="AUPeakLimiter" format="AudioUnit" category="Effect" manufacturer="Apple"
             version="1.6.0" file="AudioUnit:Effects/aufx,lmtr,appl" uniqueId="6c686266"
-            isInstrument="0" fileTime="0" infoUpdateTime="19aabe467e4" numInputs="2"
+            isInstrument="0" fileTime="0" infoUpdateTime="19ad6438bdb" numInputs="2"
             numOutputs="2" isShell="0" hasARAExtension="0" uid="6c686266"/>
     <STATE>175.hAGaoMGcv.i0AHv.DTfAGfPBJr.CT4VXsUFWsEla0YVXiQWcxUlbTQVXzEFUzkGbkc0b0IFc4AWYWYWYxMWZu4FVU4FcoQGakQlDgAGbr8DDj...............C.....vNCHwa....ArynWq....f......HQX0YFdRvVazIGD.fPEZbBKwjSPJ8jc6AH.......P.A.........PC....................BB</STATE>
     <LAYOUT>

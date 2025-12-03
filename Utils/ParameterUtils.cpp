@@ -5,7 +5,7 @@
 #include "ParameterUtils.h"
 
 // Precision depends on value magnitude
-juce::String ParameterUtils::adaptPrecisionMilliseconds(const float value, int)
+juce::String ParameterUtils::stringFromMilliseconds(const float value, int)
 {
     if (value < 10.0f)
     {
@@ -27,3 +27,14 @@ juce::String ParameterUtils::adaptPrecisionMilliseconds(const float value, int)
         return juce::String(value * 0.001f, 2) + " s";
     }
 }
+
+juce::String ParameterUtils::stringFromDecibels(const float value, int)
+{
+    return juce::String(value) + "dB";
+}
+
+juce::String ParameterUtils::stringFromPercent(const float value, int)
+{
+    return juce::String(value) + "%";
+}
+

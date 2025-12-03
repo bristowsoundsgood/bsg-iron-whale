@@ -4,42 +4,27 @@
 
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginProcessor& p)
-    : AudioProcessorEditor (&p), processorRef (p), attOutGain(p.getProcessorValueTreeState(), PluginConfig::paramIDOutGain.getParamID(), sldrOutGain),
-        attDelayTime(p.getProcessorValueTreeState(), PluginConfig::paramIDDelayTime.getParamID(), sldrDelayTime),
-        attDryWet(p.getProcessorValueTreeState(), PluginConfig::paramIDDryWet.getParamID(), sldrDryWet)
+    : AudioProcessorEditor (&p), processorRef (p), stateRef(p.getProcessorValueTreeState())
 {
     juce::ignoreUnused (processorRef);
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (EditorDefaults::defaultWindowWidth, EditorDefaults::defaultWindowHeight);
 
-    // Add + configure child components
-    addAndMakeVisible(sldrOutGain);
-    addAndMakeVisible(lblOutGain);
-    addAndMakeVisible(sldrDelayTime);
-    addAndMakeVisible(lblDelayTime);
-    addAndMakeVisible(sldrDryWet);
-    addAndMakeVisible(lblDryWet);
+    // Aggregate dials into respective groups
+    delayGroup.setText("Delay");
+    delayGroup.setTextLabelPosition(juce::Justification::centred);
+    delayGroup.addAndMakeVisible(dialDelayTime);
+    addAndMakeVisible(delayGroup);
 
-    sldrOutGain.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    sldrOutGain.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrOutGain.setRange(PluginConfig::minOutGain, PluginConfig::maxOutGain, PluginConfig::intervalDefault);
-    sldrOutGain.setTextValueSuffix("dB");
-    lblOutGain.setText(PluginConfig::paramNameOutGain, juce::NotificationType::dontSendNotification);
-    lblOutGain.attachToComponent(&sldrOutGain, true);
+    feedbackGroup.setText("Feedback");
+    feedbackGroup.setTextLabelPosition(juce::Justification::centred);
+    addAndMakeVisible(feedbackGroup);
 
-    sldrDelayTime.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    sldrDelayTime.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrDelayTime.setRange(PluginConfig::minDelayTime, PluginConfig::maxDelayTime, PluginConfig::intervalDefault);
-    lblDelayTime.setText(PluginConfig::paramNameDelayTime, juce::NotificationType::dontSendNotification);
-    lblDelayTime.attachToComponent(&sldrDelayTime, true);
+    mixGroup.setText("Mix");
+    mixGroup.setTextLabelPosition(juce::Justification::centred);
+    mixGroup.addAndMakeVisible(dialDryWet);
+    mixGroup.addAndMakeVisible(dialOutGain);
+    addAndMakeVisible(mixGroup);
 
-    sldrDryWet.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    sldrDryWet.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::TextBoxBelow, EditorDefaults::defaultSliderTextBoxReadOnly, EditorDefaults::defaultSliderTextBoxWidth, EditorDefaults::defaultSliderTextBoxHeight);
-    sldrDryWet.setRange(PluginConfig::minDryWet, PluginConfig::maxDryWet, PluginConfig::intervalDryWet);
-    sldrDryWet.setTextValueSuffix("%");
-    lblDryWet.setText(PluginConfig::paramNameDryWet, juce::NotificationType::dontSendNotification);
-    lblDryWet.attachToComponent(&sldrDryWet, true);
+    setSize(GUIDefaults::windowWidth, GUIDefaults::windowHeight);
 }
 
 AudioPluginAudioProcessorEditor::~AudioPluginAudioProcessorEditor()
@@ -50,21 +35,34 @@ AudioPluginAudioProcessorEditor::~AudioPluginAudioProcessorEditor()
 void AudioPluginAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
+    g.fillAll(juce::Colours::darkgrey);
+    g.setColour(juce::Colours::white);
+    g.setFont(15.0f);
 }
 
 // Lay out child components
 void AudioPluginAudioProcessorEditor::resized()
 {
     const juce::Rectangle<int> bounds = getLocalBounds();
-    sldrDelayTime.setBounds(bounds.getCentreX() - EditorDefaults::defaultSliderWidth / 2, bounds.getCentreY() - EditorDefaults::defaultSliderHeight / 2,
-                             EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
 
-    // Position elements relative to delay time, which is the main parameter.
-    const juce::Rectangle<int> delayTimeBounds = sldrDelayTime.getBounds();
-    sldrOutGain.setBounds(delayTimeBounds.getX(), delayTimeBounds.getY() - EditorDefaults::defaultSliderHeight - EditorDefaults::sliderMarginY, EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
-    sldrDryWet.setBounds(delayTimeBounds.getX(), delayTimeBounds.getBottom() + EditorDefaults::sliderMarginY, EditorDefaults::defaultSliderWidth, EditorDefaults::defaultSliderHeight);
+    constexpr int dialWidth = GUIDefaults::groupWidth - 10;
+    constexpr int dialHeight = dialWidth + 30;
+
+    delayGroup.setBounds(GUIDefaults::marginSide, GUIDefaults::marginTop,
+        GUIDefaults::groupWidth, GUIDefaults::groupHeight);
+
+    dialDelayTime.setBounds(delayGroup.getLocalBounds().getCentreX() - dialWidth / 2, delayGroup.getLocalBounds().getTopLeft().getY() + GUIDefaults::marginTop,
+        dialWidth, dialHeight);
+
+    feedbackGroup.setBounds(delayGroup.getBounds().getRight() + GUIDefaults::marginSide, GUIDefaults::marginTop,
+        bounds.getWidth() - 2 * ((2 * GUIDefaults::marginSide) + GUIDefaults::groupWidth), GUIDefaults::groupHeight);
+
+    mixGroup.setBounds(bounds.getRight() - GUIDefaults::groupWidth - GUIDefaults::marginSide, GUIDefaults::marginTop,
+        GUIDefaults::groupWidth, GUIDefaults::groupHeight);
+
+    dialOutGain.setBounds(mixGroup.getLocalBounds().getCentreX() - dialWidth / 2, mixGroup.getLocalBounds().getTopLeft().getY() + GUIDefaults::marginTop,
+        dialWidth, dialHeight);
+
+    dialDryWet.setBounds(mixGroup.getLocalBounds().getCentreX() - dialWidth / 2, dialOutGain.getBottom() + GUIDefaults::marginTop,
+        dialWidth, dialHeight);
 }

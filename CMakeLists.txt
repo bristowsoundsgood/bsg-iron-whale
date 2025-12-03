@@ -42,6 +42,8 @@ add_library(BSGDelay_Core STATIC
         Source/CircularBuffer.h
         Source/DelayDSP.cpp
         Source/DelayDSP.h
+        GUI/RotaryDial.cpp
+        GUI/RotaryDial.h
         Utils/ParameterUtils.cpp
         Utils/ParameterUtils.h
 )
