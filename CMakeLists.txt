@@ -34,20 +34,20 @@ set(SourceFiles
 )
 
 add_library(BSGDelay_Core STATIC
-        Source/GainDSP.cpp
-        Source/GainDSP.h
+        Source/DSP/GainDSP.cpp
+        Source/DSP/GainDSP.h
         Source/PluginParameters.cpp
         Source/PluginParameters.h
         Source/CircularBuffer.cpp
         Source/CircularBuffer.h
-        Source/DelayDSP.cpp
-        Source/DelayDSP.h
-        GUI/DefaultSkin.cpp
-        GUI/DefaultSkin.h
-        GUI/RotaryDial.cpp
-        GUI/RotaryDial.h
-        Utils/ParameterUtils.cpp
-        Utils/ParameterUtils.h
+        Source/DSP/DelayDSP.cpp
+        Source/DSP/DelayDSP.h
+        Source/GUI/DefaultSkin.cpp
+        Source/GUI/DefaultSkin.h
+        Source/GUI/RotaryDial.cpp
+        Source/GUI/RotaryDial.h
+        Source/Utils/ParameterUtils.cpp
+        Source/Utils/ParameterUtils.h
 )
 
 target_link_libraries(BSGDelay_Core PRIVATE

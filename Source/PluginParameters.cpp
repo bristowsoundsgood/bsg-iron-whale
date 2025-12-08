@@ -3,7 +3,7 @@
 //
 
 #include "PluginParameters.h"
-#include "../Utils/ParameterUtils.h"
+#include "Utils/ParameterUtils.h"
 
 PluginParameters::PluginParameters(const juce::AudioProcessorValueTreeState& stateManager)
 {

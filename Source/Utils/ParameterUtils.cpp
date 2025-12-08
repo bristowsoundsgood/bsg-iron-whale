@@ -3,8 +3,7 @@
 //
 
 #include "ParameterUtils.h"
-
-#include "../Source/PluginParameters.h"
+#include "../PluginParameters.h"
 
 // Precision depends on value magnitude
 juce::String ParameterUtils::stringFromMilliseconds(const float value, int)

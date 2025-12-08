@@ -2,8 +2,8 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 #include "PluginProcessor.h"
-#include "../GUI/DefaultSkin.h"
-#include "../GUI/RotaryDial.h"
+#include "GUI/DefaultSkin.h"
+#include "GUI/RotaryDial.h"
 
 //==============================================================================
 class AudioPluginAudioProcessorEditor final : public juce::AudioProcessorEditor

@@ -3,7 +3,7 @@
 //
 
 #include "DelayDSP.h"
-#include "PluginParameters.h"
+#include "../PluginParameters.h"
 
 // Assumes the passed value is in seconds, not milliseconds!
 int DelayDSP::convertSecondsToSamples(const float seconds) const

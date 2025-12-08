@@ -8,7 +8,7 @@
 #include <juce_gui_basics/juce_gui_basics.h>
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "DefaultSkin.h"
-#include "../Source/PluginParameters.h"
+#include "../PluginParameters.h"
 
 class RotaryDial : public juce::Component {
 public:
