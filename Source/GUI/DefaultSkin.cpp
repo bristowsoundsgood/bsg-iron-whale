@@ -7,6 +7,7 @@
 RotaryDialLookAndFeel::RotaryDialLookAndFeel()
 {
     setColour(juce::Slider::rotarySliderFillColourId, Colours::Dial::dialFill);
+    setDefaultSansSerifTypeface(Text::Font::getFont());
 
     // setColour(juce::Label::textColourId, Colours::Dial::label);
     // setColour(juce::Slider::textBoxTextColourId, Colours::Dial::label);
@@ -17,5 +18,10 @@ RotaryDialLookAndFeel& RotaryDialLookAndFeel::instance()
     static RotaryDialLookAndFeel INSTANCE;
     return INSTANCE;
 }
+
+
+
+
+
 
 

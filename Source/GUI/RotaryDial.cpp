@@ -19,6 +19,8 @@ RotaryDial::RotaryDial(juce::AudioProcessorValueTreeState& state, const juce::Pa
     label.attachToComponent(&slider, false);
     addAndMakeVisible(label);
 
+    setLookAndFeel(&RotaryDialLookAndFeel::instance());
+
     setSize(Dimensions::sliderWidth, Dimensions::sliderHeight + Dimensions::labelHeight);
 }
 

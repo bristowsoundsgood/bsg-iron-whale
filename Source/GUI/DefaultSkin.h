@@ -6,10 +6,16 @@
 #define DEFAULTSKIN_H
 
 #include <juce_gui_basics/juce_gui_basics.h>
+#include "BinaryData.h"
 
 namespace Text
 {
-    static constexpr float fontSize {11.0f};
+    class Font
+    {
+    public:
+        static juce::Typeface::Ptr getFont() { return {juce::Typeface::createSystemTypefaceFor(BinaryData::IBMPlexSans_ttf, BinaryData::IBMPlexSans_ttfSize)}; }
+        Font() = delete;
+    };
 }
 
 namespace Dimensions
@@ -54,7 +60,6 @@ public:
 
 private:
     RotaryDialLookAndFeel();
-    // juce::Typeface::Ptr m_customTypeface {juce::Typeface::createSystemTypefaceFor(BinaryData::)}
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(RotaryDialLookAndFeel)
 };
 

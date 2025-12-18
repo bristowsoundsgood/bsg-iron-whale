@@ -37,7 +37,7 @@ void AudioPluginAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(Colours::background);
     g.setColour(juce::Colours::white);
-    g.setFont(Text::fontSize);
+    g.setFont(15.0f);
 }
 
 // Lay out child components

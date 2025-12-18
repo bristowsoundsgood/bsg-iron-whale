@@ -1,6 +1,6 @@
 ###### PROJECT CONFIG ######
 cmake_minimum_required(VERSION 3.24)
-project(BSGDelay VERSION 0.0.1)
+project(IronWhale VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_XCODE_GENERATE_SCHEME OFF)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -25,15 +25,35 @@ CPMAddPackage(
         GIT_TAG origin/master
 )
 
+###### JUCE PLUGIN CONFIG ######
+juce_add_plugin(${PROJECT_NAME}
+        COMPANY_NAME bristowsoundsgood
+        IS_SYNTH FALSE
+        NEEDS_MIDI_INPUT FALSE
+        NEEDS_MIDI_OUTPUT FALSE
+        IS_MIDI_EFFECT FALSE
+        EDITOR_WANTS_KEYBOARD_FOCUS FALSE
+        JUCE_VST3_CAN_REPLACE_VST2 FALSE
+        COPY_PLUGIN_AFTER_BUILD TRUE
+        PLUGIN_MANUFACTURER_CODE BSGX
+        PLUGIN_CODE BSG1
+        FORMATS VST3 AU Standalone
+        PLUGIN_NAME "IronWhale"
+        PRODUCT_NAME "IronWhale"
+)
+
+juce_add_binary_data(BinaryData
+        SOURCES
+        Assets/Quantico.ttf
+        Assets/IBMPlexSans.ttf
+)
+
 ###### SET UP SOURCE FILES + LIBRARIES ######
 set(SourceFiles
         Source/PluginEditor.cpp
         Source/PluginEditor.h
         Source/PluginProcessor.cpp
         Source/PluginProcessor.h
-)
-
-add_library(BSGDelay_Core STATIC
         Source/DSP/GainDSP.cpp
         Source/DSP/GainDSP.h
         Source/PluginParameters.cpp
@@ -50,7 +70,10 @@ add_library(BSGDelay_Core STATIC
         Source/Utils/ParameterUtils.h
 )
 
-target_link_libraries(BSGDelay_Core PRIVATE
+target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+        BinaryData
+        juce::juce_audio_plugin_client
         juce::juce_analytics
         juce::juce_audio_basics
         juce::juce_audio_devices
@@ -64,28 +87,6 @@ target_link_libraries(BSGDelay_Core PRIVATE
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags
-)
-
-###### JUCE PLUGIN CONFIG ######
-juce_add_plugin(${PROJECT_NAME}
-        COMPANY_NAME bristowsoundsgood
-        IS_SYNTH FALSE
-        NEEDS_MIDI_INPUT FALSE
-        NEEDS_MIDI_OUTPUT FALSE
-        IS_MIDI_EFFECT FALSE
-        EDITOR_WANTS_KEYBOARD_FOCUS FALSE
-        JUCE_VST3_CAN_REPLACE_VST2 FALSE
-        COPY_PLUGIN_AFTER_BUILD TRUE
-        PLUGIN_MANUFACTURER_CODE BSGX
-        PLUGIN_CODE Del1
-        FORMATS VST3 AU Standalone
-        PRODUCT_NAME "BSGDelay"
-)
-
-juce_add_binary_data(BinaryData
-        SOURCES
-            Assets/Quantico.ttf
-            Assets/IBMPlexSans.ttf
 )
 
 # How we want our SourceFiles to appear in our IDE
@@ -102,12 +103,6 @@ target_compile_definitions(${PROJECT_NAME}
         JUCE_VST3_CAN_REPLACE_VST2=0
 )
 
-# JUCE libraries to bring into our project
-target_link_libraries(${PROJECT_NAME}
-        PUBLIC
-        BSGDelay_Core
-)
-
 ###### SET UP TESTING EXECUTABLES ######
 ENABLE_TESTING()
 
@@ -116,19 +111,21 @@ Include(FetchContent)
 FetchContent_Declare(
         Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG        v3.8.1 # or a later release
+        GIT_TAG        v3.8.1
 )
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(BSGDelayTest
+add_executable(IronWhaleTest
         Tests/CircularBufferTest.cpp
 )
 
-target_link_libraries(BSGDelayTest PRIVATE
+target_sources(IronWhaleTest PRIVATE ${SourceFiles})
+
+target_link_libraries(IronWhaleTest PRIVATE
         Catch2::Catch2WithMain
-        BSGDelay_Core
         BinaryData
+        juce::juce_audio_plugin_client
         juce::juce_analytics
         juce::juce_audio_basics
         juce::juce_audio_devices
@@ -146,4 +143,4 @@ target_link_libraries(BSGDelayTest PRIVATE
 
 include(CTest)
 include(Catch)
-catch_discover_tests(BSGDelayTest)
+catch_discover_tests(IronWhaleTest)

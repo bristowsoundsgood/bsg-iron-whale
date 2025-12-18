@@ -13,8 +13,9 @@ public:
     static juce::String stringFromMilliseconds(float value, int);
     static juce::String stringFromPercent(float value, int);
     static juce::String stringFromDecibels(float value, int);
-
     static float millisecondsFromString(const juce::String& text);
+
+    ParameterUtils() = delete;
 };
 
 
