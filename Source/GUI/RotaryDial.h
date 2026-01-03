@@ -12,7 +12,7 @@
 
 class RotaryDial : public juce::Component {
 public:
-    RotaryDial(juce::AudioProcessorValueTreeState& state,  const juce::ParameterID& parameterID, const juce::String& labelText);
+    RotaryDial(juce::AudioProcessorValueTreeState& state, const juce::ParameterID& parameterID, const juce::String& labelText);
     ~RotaryDial() override;
 
     juce::Slider slider;

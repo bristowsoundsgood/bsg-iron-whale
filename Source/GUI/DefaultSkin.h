@@ -49,10 +49,10 @@ namespace Colours
 
     namespace Dial
     {
-        const juce::Colour outline {255, 250, 245};
-        const juce::Colour gradientTop {250, 245, 240};
-        const juce::Colour gradientBottom {240, 235, 230};
-        const juce::Colour trackBackground {205, 200, 195};
+        const juce::Colour outline {23, 29, 37};
+        const juce::Colour gradientTop {33, 39, 47};
+        const juce::Colour gradientBottom {28, 34, 42};
+        const juce::Colour trackBackground {250, 239, 235};
         const juce::Colour dialTick {100, 100, 100};
         const juce::Colour dialFill {208, 117, 84};
         const juce::Colour dropShadow {195, 190, 185};

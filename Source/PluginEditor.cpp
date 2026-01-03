@@ -46,7 +46,7 @@ void AudioPluginAudioProcessorEditor::resized()
 {
     const juce::Rectangle<int> bounds = getLocalBounds();
 
-    constexpr int dialWidth = Dimensions::groupWidth - 10;
+    constexpr int dialWidth = Dimensions::groupWidth - 30;
     constexpr int dialHeight = dialWidth + 30;
 
     delayGroup.setBounds(Dimensions::marginSide, Dimensions::marginTop,

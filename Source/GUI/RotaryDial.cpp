@@ -22,8 +22,8 @@ RotaryDial::RotaryDial(juce::AudioProcessorValueTreeState& state,  const juce::P
 
     slider.setRotaryParameters(1.25f * juce::MathConstants<float>::pi, 2.75f * juce::MathConstants<float>::pi, true);
 
-    setLookAndFeel(&RotaryDialLookAndFeel::instance());
     setSize(Dimensions::sliderWidth, Dimensions::sliderHeight + Dimensions::labelHeight);
+    setLookAndFeel(&RotaryDialLookAndFeel::instance());
 }
 
 RotaryDial::~RotaryDial()
@@ -40,7 +40,5 @@ void RotaryDial::resized()
 
     // Label area occupies remaining bottom portion
     label.setBounds(totalArea);
-
-    // setLookAndFeel(&RotaryDialLookAndFeel::instance());
 }
 

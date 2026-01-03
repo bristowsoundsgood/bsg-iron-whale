@@ -45,13 +45,13 @@ RotaryDialLookAndFeel& RotaryDialLookAndFeel::instance()
 
 void RotaryDialLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider)
 {
+    // 1. Draw Circle for Knob
     const juce::Rectangle<float> bounds = juce::Rectangle<int>(x, y, width, width).toFloat();
-    const juce::Rectangle<float> dialRect = bounds.reduced(15.0f, 15.0f);
+    const juce::Rectangle<float> dialRect = bounds.reduced(10.0f, 10.0f);
 
     juce::Path path = juce::Path();
     path.addEllipse(dialRect);
     dropShadow.drawForPath(g, path);
-
     g.setColour(Colours::Dial::outline);
     g.fillEllipse(dialRect);
 
@@ -81,7 +81,7 @@ void RotaryDialLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
     juce::Path dialPath;
     dialPath.startNewSubPath(dialStart);
     dialPath.lineTo(dialEnd);
-    g.setColour(Colours::Dial::dialTick);
+    g.setColour(Colours::Dial::trackBackground);
     g.strokePath(dialPath, strokeType);
 
     if (slider.isEnabled())
@@ -92,7 +92,6 @@ void RotaryDialLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
         g.strokePath(valueArc, strokeType);
     }
 }
-
 
 
 
