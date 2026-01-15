@@ -11,9 +11,11 @@ class ParameterUtils
 {
 public:
     static juce::String stringFromMilliseconds(float value, int);
-    static juce::String stringFromPercent(float value, int);
+    static juce::String stringFromPercentNormalised(float value, int);
     static juce::String stringFromDecibels(float value, int);
     static float millisecondsFromString(const juce::String& text);
+    static float feedbackNormalisedFromString(const juce::String& text);
+    static float dryWetNormalisedFromString(const juce::String& text);
 
     ParameterUtils() = delete;
 };

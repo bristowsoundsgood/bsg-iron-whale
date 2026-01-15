@@ -49,11 +49,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginParameters::createPara
             .withValueFromStringFunction(ParameterUtils::millisecondsFromString)),
 
         std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDFeedback, PluginConfig::paramNameFeedback, PluginConfig::feedbackRange,
-            PluginConfig::defaultFeedback, juce::AudioParameterFloatAttributes().withStringFromValueFunction(ParameterUtils::stringFromPercent)),
+            PluginConfig::defaultFeedback, juce::AudioParameterFloatAttributes()
+            .withStringFromValueFunction(ParameterUtils::stringFromPercentNormalised)
+            .withValueFromStringFunction(ParameterUtils::feedbackNormalisedFromString)),
 
         std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDDryWet, PluginConfig::paramNameDryWet, PluginConfig::dryWetRange,
             PluginConfig::defaultDryWet,
             juce::AudioParameterFloatAttributes()
-            .withStringFromValueFunction(ParameterUtils::stringFromPercent))
+            .withStringFromValueFunction(ParameterUtils::stringFromPercentNormalised)
+            .withValueFromStringFunction(ParameterUtils::dryWetNormalisedFromString))
     };
 }

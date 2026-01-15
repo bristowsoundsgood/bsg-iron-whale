@@ -34,10 +34,11 @@ juce::String ParameterUtils::stringFromDecibels(const float value, int)
     return juce::String(value, 2) + "dB";
 }
 
-juce::String ParameterUtils::stringFromPercent(const float value, int)
+juce::String ParameterUtils::stringFromPercentNormalised(const float value, int)
 {
-    return juce::String(value) + "%";
+    return juce::String(value * 100.0f) + "%";
 }
+
 
 float ParameterUtils::millisecondsFromString(const juce::String& text)
 {
@@ -57,6 +58,56 @@ float ParameterUtils::millisecondsFromString(const juce::String& text)
     else
     {
         return PluginConfig::defaultDelayTime;
+    }
+}
+
+float ParameterUtils::feedbackNormalisedFromString(const juce::String& text)
+{
+    const float value = text.getFloatValue() / 100.0f;          // Normalise back to 0.0->1.0.
+
+    if (value < PluginConfig::minFeedback)
+    {
+        return PluginConfig::minFeedback;
+    }
+
+    else if (value > PluginConfig::maxFeedback)
+    {
+        return PluginConfig::maxFeedback;
+    }
+
+    else if (value >= PluginConfig::minFeedback && value <= PluginConfig::maxFeedback)
+    {
+        return value;
+    }
+
+    else
+    {
+        return PluginConfig::defaultFeedback;
+    }
+}
+
+float ParameterUtils::dryWetNormalisedFromString(const juce::String& text)
+{
+    const float value = text.getFloatValue() / 100.0f;          // Normalise back to 0.0->1.0.
+
+    if (value < PluginConfig::minDryWet)
+    {
+        return PluginConfig::minDryWet;
+    }
+
+    else if (value > PluginConfig::maxDryWet)
+    {
+        return PluginConfig::maxDryWet;
+    }
+
+    else if (value >= PluginConfig::minDryWet && value <= PluginConfig::maxDryWet)
+    {
+        return value;
+    }
+
+    else
+    {
+        return PluginConfig::defaultDryWet;
     }
 }
 

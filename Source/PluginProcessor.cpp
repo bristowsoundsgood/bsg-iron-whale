@@ -142,12 +142,14 @@ void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
     params.update();
     const float outGain = params.getOutputGainDB();
     const float delayTime = params.getDelayTimeSeconds();
-    const float dryWet = params.getDryWetNormalised();
+    const float feedback = params.getFeedback();
+    const float dryWet = params.getDryWet();
 
     for (auto& g : gainDSP) g.setGainDB(outGain);
     for (auto& d : delayDSP)
     {
         d.setDryWet(dryWet);
+        d.setFeedback(feedback);
         d.setTargetDelayTime(delayTime);
     }
 

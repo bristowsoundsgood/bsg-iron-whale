@@ -18,10 +18,12 @@ public:
     void smoothenDelayTime() { m_currentDelayTime += (m_targetDelayTime - m_currentDelayTime) * m_smootherCoefficient; }
 
     void setDelayTime(const float seconds) { delayLine.setDelay(convertSecondsToSamples(seconds)); }
+    void setFeedback(const float feedback) { m_feedback = feedback; }
     void setDryWet(const float dryWet) { m_dryWet = dryWet;  }
 
 private:
     float m_sampleRate {};
+    float m_feedback {};
     float m_dryWet {};
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> delayLine {};
 
