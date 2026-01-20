@@ -44,13 +44,14 @@ void DelayDSP::processBlock(const int channel, float* block, const int blockSize
 
         const float drySample = block[sample];
         const float wetSample = delayLine.popSample(channel, delayLine.getDelay());
+        const float feedbackSample = wetSample * m_feedback;
 
-        // Push dry + wet back into the buffer. If there is no wet signal, then only the dry is written.
-        const float feedbackSample = drySample + (wetSample * m_feedback);
-        delayLine.pushSample(channel, feedbackSample);
+        // If feedbackSample is 0, then only the dry will be pushed.
+        delayLine.pushSample(channel, drySample + feedbackSample);
 
-        // Mix dry + wet signal for current sample. 100% wet = only wet. 100% dry = only dry. 50% wet = dry/wet in equal amounts.
-        block[sample] = (1.0f - m_dryWet) * drySample + wetSample * m_dryWet;
+        // Mix dry and wet signal. 100% wet = only wet. 100% dry = only dry. 50% wet = dry/wet in equal amounts.
+        const float outputSample = (1.0f - m_dryWet) * drySample + m_dryWet * wetSample;
+        block[sample] = outputSample;
     }
 }
 

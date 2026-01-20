@@ -19,6 +19,7 @@ void PluginParameters::prepare(const double sampleRate) noexcept
 {
     m_smootherGain.reset(sampleRate, PluginConfig::rampSmoothTime);
     m_smootherDryWet.reset(sampleRate, PluginConfig::rampSmoothTime);
+    m_smootherFeedback.reset(sampleRate, PluginConfig::rampSmoothTime);
 }
 
 void PluginParameters::reset() noexcept
@@ -26,12 +27,14 @@ void PluginParameters::reset() noexcept
     // When playback restarts, set smoother values to the same value as the plugin parameters, meaning they do not have left-over interpolation.
     m_smootherGain.setCurrentAndTargetValue(m_paramOutGain->get());
     m_smootherDryWet.setCurrentAndTargetValue(m_paramDryWet->get());
+    m_smootherFeedback.setCurrentAndTargetValue(m_paramFeedback->get());
 }
 
 void PluginParameters::update() noexcept
 {
     m_smootherGain.setTargetValue(m_paramOutGain->get());
     m_smootherDryWet.setTargetValue(m_paramDryWet->get());
+    m_smootherFeedback.setTargetValue(m_paramFeedback->get());
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout PluginParameters::createParameterLayout() noexcept

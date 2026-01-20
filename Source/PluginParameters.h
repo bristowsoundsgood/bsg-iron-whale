@@ -67,7 +67,7 @@ public:
     [[nodiscard]] float getOutputGainDB() { return m_smootherGain.getNextValue(); }
     [[nodiscard]] float getDelayTimeSeconds() const { return m_paramDelayTime->get() / 1000.0f; }
     [[nodiscard]] float getDryWet() { return m_smootherDryWet.getNextValue(); }  // Returns float between 0.0 and 1.0 to simplify DSP
-    [[nodiscard]] float getFeedback() const { return m_paramFeedback->get(); }
+    [[nodiscard]] float getFeedback() { return m_smootherFeedback.getNextValue(); }
 
     // Parameter smoothing methods
     void prepare(double sampleRate) noexcept;
@@ -84,6 +84,7 @@ private:
     // Parameter smoothing
     juce::SmoothedValue<float> m_smootherGain {};
     juce::SmoothedValue<float> m_smootherDryWet {};
+    juce::SmoothedValue<float> m_smootherFeedback {};
 };
 
 #endif //PLUGINPARAMETERS_H
