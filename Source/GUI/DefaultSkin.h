@@ -19,6 +19,9 @@ namespace Dimensions
     static constexpr int sliderTextBoxHeight {16};
     static constexpr bool sliderTextBoxReadOnly {false};
 
+    static constexpr int btnWidth {30};
+    static constexpr int btnHeight {30};
+
     static constexpr int labelHeight {25};
 
     static constexpr int marginTop {25};

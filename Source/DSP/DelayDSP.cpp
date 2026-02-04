@@ -20,9 +20,9 @@ void DelayDSP::prepareToPlay(const int numChannels, const float sampleRate, cons
 
     // Prepare delay line (ProcessSpec encapsulates contextual information)
     juce::dsp::ProcessSpec spec {};
-    spec.sampleRate = sampleRate;
+    spec.sampleRate = static_cast<double>(sampleRate);
     spec.maximumBlockSize = static_cast<juce::uint32>(blockSize);
-    spec.numChannels = numChannels;
+    spec.numChannels = static_cast<juce::uint32>(numChannels);
     delayLine.prepare(spec);
 
     // Use max delay time to set delay line size.
@@ -33,25 +33,46 @@ void DelayDSP::prepareToPlay(const int numChannels, const float sampleRate, cons
     delayLine.reset();
 }
 
-void DelayDSP::processBlock(const int channel, float* block, const int blockSize) noexcept
+void DelayDSP::processBlock(juce::AudioBuffer<float>& buffer, const int blockSize, const bool isPingPong) noexcept
 {
     for (int sample = 0; sample < blockSize; ++sample)
     {
         // Step delay time toward target value
         smoothenDelayTime();
-        const float smoothedDelayTime = m_currentDelayTime;
+        const float smoothedDelayTime { m_currentDelayTime };
         setDelayTime(smoothedDelayTime);
 
-        const float drySample = block[sample];
-        const float wetSample = delayLine.popSample(channel, delayLine.getDelay());
-        const float feedbackSample = wetSample * m_feedback;
+        const float dryL { buffer.getSample(0, sample) };
+        const float dryR { buffer.getSample(1, sample) };
 
-        // If feedbackSample is 0, then only the dry will be pushed.
-        delayLine.pushSample(channel, drySample + feedbackSample);
+        const float wetL { delayLine.popSample(0, delayLine.getDelay()) };
+        const float wetR { delayLine.popSample(1, delayLine.getDelay()) };
+
+        const float feedbackL { wetL * m_feedback };
+        const float feedbackR { wetR * m_feedback };
+
+        // Cross feedback lines. If feedback is 0, then only the dry will be pushed.
+        if (isPingPong)
+        {
+            constexpr float panL { 0.0f };
+            constexpr float panR { 1.0f };
+            const float mono { (dryL + dryR) * 0.5f };
+            delayLine.pushSample(0, panL * mono + feedbackR);
+            delayLine.pushSample(1, panR * mono + feedbackL);
+        }
+
+        else
+        {
+            delayLine.pushSample(0, dryL + feedbackL);
+            delayLine.pushSample(1, dryR + feedbackR);
+        }
 
         // Mix dry and wet signal. 100% wet = only wet. 100% dry = only dry. 50% wet = dry/wet in equal amounts.
-        const float outputSample = (1.0f - m_dryWet) * drySample + m_dryWet * wetSample;
-        block[sample] = outputSample;
+        const float outL { dryL * (1.0f - m_dryWet)  + wetL * m_dryWet };
+        const float outR { dryR * (1.0f - m_dryWet)  + wetR * m_dryWet };
+
+        buffer.setSample(0, sample, outL);
+        buffer.setSample(1, sample, outR);
     }
 }
 

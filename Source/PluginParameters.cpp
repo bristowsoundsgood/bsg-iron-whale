@@ -12,6 +12,8 @@ PluginParameters::PluginParameters(const juce::AudioProcessorValueTreeState& sta
     m_paramDelayTime = dynamic_cast<juce::AudioParameterFloat*> (stateManager.getParameter(PluginConfig::paramIDDelayTime.getParamID()));
     m_paramDryWet = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDDryWet.getParamID()));
     m_paramFeedback = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDFeedback.getParamID()));
+    m_paramStereoWidth = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDStereoWidth.getParamID()));
+    m_paramPingPong = dynamic_cast<juce::AudioParameterBool*>(stateManager.getParameter(PluginConfig::paramIDPingPongToggle.getParamID()));
 }
 
 // Sets the sample rate and ramp time for the parameter smoothers
@@ -60,6 +62,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginParameters::createPara
             PluginConfig::defaultDryWet,
             juce::AudioParameterFloatAttributes()
             .withStringFromValueFunction(ParameterUtils::stringFromPercentNormalised)
-            .withValueFromStringFunction(ParameterUtils::dryWetNormalisedFromString))
+            .withValueFromStringFunction(ParameterUtils::dryWetNormalisedFromString)),
+
+        std::make_unique<juce::AudioParameterFloat>(PluginConfig::paramIDStereoWidth, PluginConfig::paramNameStereoWidth, PluginConfig::stereoWidthRange,
+            PluginConfig::defaultStereoWidth,
+            juce::AudioParameterFloatAttributes()
+            .withStringFromValueFunction(ParameterUtils::stringFromPercentNormalised)
+            .withValueFromStringFunction(ParameterUtils::dryWetNormalisedFromString)),
+
+        std::make_unique<juce::AudioParameterBool>(PluginConfig::paramIDPingPongToggle, PluginConfig::paramNamePingPongToggle, PluginConfig::defaultPingPongToggle)
     };
 }

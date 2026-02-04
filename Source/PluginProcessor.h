@@ -50,8 +50,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
-    std::vector<GainDSP> gainDSP {};
-    std::vector<DelayDSP> delayDSP {};
+    DelayDSP delayDSP {};
+    GainDSP gainDSP {};
 
     // State Management
     juce::AudioProcessorValueTreeState stateManager;

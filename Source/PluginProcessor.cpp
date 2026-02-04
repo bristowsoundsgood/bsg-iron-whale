@@ -88,14 +88,7 @@ void DelayPluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     params.prepare(sampleRate);
     params.reset();
 
-    // Prepare DSP objects. One per output channel
-    gainDSP.resize(numChannels);
-    delayDSP.resize(numChannels);
-
-    for (auto& d : delayDSP)
-    {
-        d.prepareToPlay(numChannels, static_cast<float>(sampleRate), samplesPerBlock);
-    }
+    delayDSP.prepareToPlay(numChannels, static_cast<float>(sampleRate), samplesPerBlock);
 }
 
 void DelayPluginProcessor::releaseResources()
@@ -140,27 +133,22 @@ void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
 
     // Before DSP...
     params.update();
-    const float outGain = params.getOutputGainDB();
-    const float delayTime = params.getDelayTimeSeconds();
-    const float feedback = params.getFeedback();
-    const float dryWet = params.getDryWet();
+    const float outGain { params.getOutputGainDB() };
+    const float delayTime { params.getDelayTimeSeconds() };
+    const float feedback { params.getFeedback() };
+    const float dryWet { params.getDryWet() };
+    const float stereoWidth { params.getStereoWidth() };
+    const bool isPingPong { params.getPingPongToggle() };
 
-    for (auto& g : gainDSP) g.setGainDB(outGain);
-    for (auto& d : delayDSP)
-    {
-        d.setDryWet(dryWet);
-        d.setFeedback(feedback);
-        d.setTargetDelayTime(delayTime);
-    }
+    gainDSP.setGainDB(outGain);
+    delayDSP.setDryWet(dryWet);
+    delayDSP.setFeedback(feedback);
+    delayDSP.setTargetDelayTime(delayTime);
+    delayDSP.setStereoWidth(stereoWidth);
 
-    // Process blocks of samples
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        float* channelData = audioBuffer.getWritePointer(channel);
-
-        delayDSP[channel].processBlock(channel, channelData, blockSize);
-        gainDSP[channel].processBlock(channelData, blockSize);
-    }
+    // DSP
+    delayDSP.processBlock(audioBuffer, blockSize, isPingPong);
+    gainDSP.processBlock(audioBuffer, blockSize);
 }
 
 //==============================================================================

@@ -26,10 +26,14 @@ private:
     juce::GroupComponent mixGroup;
 
     // Declare child components
-    RotaryDial dialDelayTime {stateRef, PluginConfig::paramIDDelayTime, PluginConfig::labelTextDelayTime};
-    RotaryDial dialDryWet {stateRef, PluginConfig::paramIDDryWet, PluginConfig::labelTextDryWet};
-    RotaryDial dialOutGain {stateRef, PluginConfig::paramIDOutGain, PluginConfig::labelTextOutGain};
-    RotaryDial dialFeedback {stateRef, PluginConfig::paramIDFeedback, PluginConfig::labelTextFeedback};
+    RotaryDial dialDelayTime { stateRef, PluginConfig::paramIDDelayTime, PluginConfig::labelTextDelayTime };
+    RotaryDial dialDryWet { stateRef, PluginConfig::paramIDDryWet, PluginConfig::labelTextDryWet };
+    RotaryDial dialOutGain { stateRef, PluginConfig::paramIDOutGain, PluginConfig::labelTextOutGain };
+    RotaryDial dialFeedback { stateRef, PluginConfig::paramIDFeedback, PluginConfig::labelTextFeedback };
+    RotaryDial dialStereoWidth { stateRef, PluginConfig::paramIDStereoWidth, PluginConfig::labelTextStereoWidth };
+
+    juce::ToggleButton btnPingPong { };
+    juce::AudioProcessorValueTreeState::ButtonAttachment attachBtnPingPong;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioPluginAudioProcessorEditor)
 };

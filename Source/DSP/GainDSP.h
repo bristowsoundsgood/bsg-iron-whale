@@ -10,7 +10,7 @@ class GainDSP
 {
 public:
     static float dBToLinearCoefficient(float dB) noexcept;
-    void processBlock(float* block, int blockSize) const noexcept;
+    void processBlock(juce::AudioBuffer<float>& buffer, int blockSize) const noexcept;
 
     // Getters / Setters
     [[nodiscard]] float getGainDB() const { return m_gainDB; }
@@ -18,6 +18,5 @@ public:
 private:
     float m_gainDB {};
 };
-
 
 #endif //BSGDELAY_GAINDSP_H

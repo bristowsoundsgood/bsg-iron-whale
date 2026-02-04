@@ -4,7 +4,8 @@
 
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginProcessor& p)
-    : AudioProcessorEditor (&p), processorRef (p), stateRef(p.getProcessorValueTreeState())
+    : AudioProcessorEditor (&p), processorRef (p), stateRef(p.getProcessorValueTreeState()),
+        attachBtnPingPong(stateRef, PluginConfig::paramIDPingPongToggle.getParamID(), btnPingPong)
 {
     juce::ignoreUnused (processorRef);
 
@@ -17,6 +18,8 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor (DelayPluginPro
     feedbackGroup.setText("FEEDBACK");
     feedbackGroup.setTextLabelPosition(juce::Justification::centred);
     feedbackGroup.addAndMakeVisible(dialFeedback);
+    feedbackGroup.addAndMakeVisible(dialStereoWidth);
+    feedbackGroup.addAndMakeVisible(btnPingPong);
     addAndMakeVisible(feedbackGroup);
 
     mixGroup.setText("MIX");
@@ -65,8 +68,15 @@ void AudioPluginAudioProcessorEditor::resized()
     dialOutGain.setBounds(mixGroup.getLocalBounds().getCentreX() - dialWidth / 2, mixGroup.getLocalBounds().getTopLeft().getY() + Dimensions::marginTop,
         dialWidth, dialHeight);
 
-    dialFeedback.setBounds(feedbackGroup.getLocalBounds(). getCentreX() - dialWidth / 2, feedbackGroup.getLocalBounds().getTopLeft().getY() + Dimensions::marginTop,
+    dialFeedback.setBounds(feedbackGroup.getLocalBounds().getCentreX() - dialWidth / 2, feedbackGroup.getLocalBounds().getTopLeft().getY() + Dimensions::marginTop,
         dialWidth, dialHeight);
+
+    // Using .getBounds() to get dial coords. .getLocalBounds() references the parent (feedbackGroup)
+    dialStereoWidth.setBounds(dialFeedback.getBounds().getRight() + Dimensions::marginTop, dialFeedback.getBounds().getY(),
+        dialWidth, dialHeight);
+
+    btnPingPong.setBounds(dialFeedback.getLocalBounds().getX(), dialFeedback.getBounds().getY() + Dimensions::dialBufferY,
+        Dimensions::btnWidth, Dimensions::btnHeight);
 
     dialDryWet.setBounds(mixGroup.getLocalBounds().getCentreX() - dialWidth / 2, dialOutGain.getBottom() + Dimensions::marginTop,
         dialWidth, dialHeight);

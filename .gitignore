@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Host testing projects
+*.filtergraph
+
 .DS_Store
 .idea/
 Build/

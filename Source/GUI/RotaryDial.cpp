@@ -16,7 +16,7 @@ RotaryDial::RotaryDial(juce::AudioProcessorValueTreeState& state,  const juce::P
 
     label.setText(labelText, juce::NotificationType::dontSendNotification);
     label.setJustificationType(juce::Justification::horizontallyCentred);
-    label.setBorderSize(juce::BorderSize<int>(0));
+    label.setBorderSize(juce::BorderSize(0));
     label.attachToComponent(&slider, false);
     addAndMakeVisible(label);
 
