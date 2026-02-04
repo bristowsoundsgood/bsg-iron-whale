@@ -7,3 +7,4 @@ I am documenting the entire development process through commits. Mostly for pers
 * Delay DSP algorithm.
 * Saturation / Excitation / Distortion DSP algorithms.
 * VST3 & AU plugin format support.
+* Slick GUI.
