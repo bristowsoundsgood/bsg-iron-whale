@@ -62,6 +62,8 @@ set(SourceFiles
         Source/CircularBuffer.h
         Source/DSP/DelayDSP.cpp
         Source/DSP/DelayDSP.h
+        Source/DSP/StereoWidthDSP.cpp
+        Source/DSP/StereoWidthDSP.h
         Source/GUI/DefaultSkin.cpp
         Source/GUI/DefaultSkin.h
         Source/GUI/RotaryDial.cpp

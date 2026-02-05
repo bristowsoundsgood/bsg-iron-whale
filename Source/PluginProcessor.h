@@ -4,8 +4,9 @@
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <juce_dsp/juce_dsp.h>
 
-#include "DSP/GainDSP.h"
 #include "DSP/DelayDSP.h"
+#include "DSP/StereoWidthDSP.h"
+#include "DSP/GainDSP.h"
 #include "PluginParameters.h"
 
 //==============================================================================
@@ -52,6 +53,7 @@ public:
 private:
     DelayDSP delayDSP {};
     GainDSP gainDSP {};
+    StereoWidthDSP widthDSP {};
 
     // State Management
     juce::AudioProcessorValueTreeState stateManager;

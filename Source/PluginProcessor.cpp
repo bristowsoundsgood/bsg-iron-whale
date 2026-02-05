@@ -133,21 +133,22 @@ void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
 
     // Before DSP...
     params.update();
-    const float outGain { params.getOutputGainDB() };
     const float delayTime { params.getDelayTimeSeconds() };
     const float feedback { params.getFeedback() };
     const float dryWet { params.getDryWet() };
-    const float stereoWidth { params.getStereoWidth() };
     const bool isPingPong { params.getPingPongToggle() };
+    const float stereoWidth { params.getStereoWidth() };
+    const float outGain { params.getOutputGainDB() };
 
-    gainDSP.setGainDB(outGain);
     delayDSP.setDryWet(dryWet);
     delayDSP.setFeedback(feedback);
     delayDSP.setTargetDelayTime(delayTime);
-    delayDSP.setStereoWidth(stereoWidth);
+    widthDSP.setWidth(stereoWidth);
+    gainDSP.setGainDB(outGain);
 
     // DSP
     delayDSP.processBlock(audioBuffer, blockSize, isPingPong);
+    widthDSP.processBlock(audioBuffer, blockSize);
     gainDSP.processBlock(audioBuffer, blockSize);
 }
 

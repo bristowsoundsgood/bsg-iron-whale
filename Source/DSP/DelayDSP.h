@@ -20,7 +20,6 @@ public:
     void setDelayTime(const float seconds) { delayLine.setDelay(convertSecondsToSamples(seconds)); }
     void setFeedback(const float feedback) { m_feedback = feedback; }
     void setDryWet(const float dryWet) { m_dryWet = dryWet; }
-    void setStereoWidth(const float stereoWidth) { m_stereoWidth = stereoWidth; }
 
 private:
     juce::dsp::DelayLine<float> delayLine {};
@@ -28,7 +27,6 @@ private:
     float m_sampleRate { };
     float m_feedback { };
     float m_dryWet { };
-    float m_stereoWidth { };
 
     float m_currentDelayTime { 0.0f };
     float m_targetDelayTime { 0.0f };
