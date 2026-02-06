@@ -12,8 +12,8 @@ PluginParameters::PluginParameters(const juce::AudioProcessorValueTreeState& sta
     m_paramDelayTime = dynamic_cast<juce::AudioParameterFloat*> (stateManager.getParameter(PluginConfig::paramIDDelayTime.getParamID()));
     m_paramDryWet = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDDryWet.getParamID()));
     m_paramFeedback = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDFeedback.getParamID()));
-    m_paramStereoWidth = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDStereoWidth.getParamID()));
     m_paramPingPong = dynamic_cast<juce::AudioParameterBool*>(stateManager.getParameter(PluginConfig::paramIDPingPongToggle.getParamID()));
+    m_paramStereoWidth = dynamic_cast<juce::AudioParameterFloat*>(stateManager.getParameter(PluginConfig::paramIDStereoWidth.getParamID()));
 }
 
 // Sets the sample rate and ramp time for the parameter smoothers

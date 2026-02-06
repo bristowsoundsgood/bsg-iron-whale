@@ -33,6 +33,8 @@ private:
     float m_smootherCoefficient { 0.0f };
 
     [[nodiscard]] int convertSecondsToSamples(float seconds) const;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayDSP)
 };
 
 

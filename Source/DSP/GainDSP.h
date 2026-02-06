@@ -17,6 +17,7 @@ public:
     void setGainDB(const float newGainDB) { m_gainDB = newGainDB; }
 private:
     float m_gainDB {};
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainDSP)
 };
 
 #endif //BSGDELAY_GAINDSP_H

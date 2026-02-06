@@ -13,6 +13,7 @@ public:
     void setWidth(const float stereoWidth) { m_stereoWidth = stereoWidth; }
 private:
     float m_stereoWidth { };
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (StereoWidthDSP)
 };
 
 #endif //STEREOWIDTHDSP_H

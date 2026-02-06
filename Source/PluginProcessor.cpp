@@ -80,9 +80,9 @@ void DelayPluginProcessor::changeProgramName (int index, const juce::String& new
 }
 
 //==============================================================================
-void DelayPluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void DelayPluginProcessor::prepareToPlay (const double sampleRate, const int samplesPerBlock)
 {
-    const int numChannels = getTotalNumOutputChannels();
+    const int numChannels { getTotalNumOutputChannels() };
 
     // Parameters
     params.prepare(sampleRate);
@@ -98,21 +98,16 @@ void DelayPluginProcessor::releaseResources()
 
 bool DelayPluginProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
-    juce::ignoreUnused (layouts);
-    return true;
-  #else
-    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
-        return false;
+    const auto mono { juce::AudioChannelSet::mono() };
+    const auto stereo { juce::AudioChannelSet::stereo() };
+    const auto mainIn { layouts.getMainInputChannelSet() };
+    const auto mainOut { layouts.getMainOutputChannelSet() };
 
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
-    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
-        return false;
-   #endif
-    return true;
-  #endif
+    if (mainIn == mono && mainOut == mono) { return true; }
+    if (mainIn == mono && mainOut == stereo) { return true; }
+    if (mainIn == stereo && mainOut == stereo) { return true; }
+
+    return false; // e.g., input = stereo, output = mono.
 }
 
 void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
@@ -123,6 +118,22 @@ void DelayPluginProcessor::processBlock (juce::AudioBuffer<float>& audioBuffer,
 
     const int totalNumInputChannels = getTotalNumInputChannels();
     const int totalNumOutputChannels = getTotalNumOutputChannels();
+
+    /* Handles mono tracks in host. If an input/output is mono, this creates two channels, L and R, with the same signal.
+     * Therefore,  no DSP logic needs changing: it can treat a signal as stereo.
+     */
+    const auto mainInput { getBusBuffer(audioBuffer, true, 0) };
+    const auto mainInputChannels { mainInput.getNumChannels() };
+    const auto isMainInputStereo { mainInputChannels > 1 };
+    const float* inputDataL { mainInput.getReadPointer(0) };
+    const float* inputDataR { mainInput.getReadPointer(isMainInputStereo ? 1 : 0) };
+
+    const auto mainOutput { getBusBuffer(audioBuffer, false, 0) };
+    const auto mainOutputChannels { mainOutput.getNumChannels() };
+    const auto isMainOutputStereo { mainOutputChannels > 1 };
+    float* outputDataL { mainOutput.getWritePointer(0) };
+    float* outputDataR { mainOutput.getWritePointer(isMainOutputStereo ? 1 : 0) };
+
     const int blockSize = audioBuffer.getNumSamples();
 
     // Clears any output channels that do not contain input data. Prevents screaming feedback.
